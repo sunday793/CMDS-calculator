@@ -47,6 +47,7 @@ class Calculator(Container):
         self.peripheral_artery_disease = self._create_dropdown("Есть", "Нет")
         
         self.submit_btn = Button("Рассчитать", on_click=self.click_submit_btn)
+        self.clear_btn = Button("Очистить", on_click=self.click_clear_btn)
         
         self.content = Column(
                 scroll=ScrollMode.ADAPTIVE,
@@ -130,7 +131,7 @@ class Calculator(Container):
                 ]
             ),
         
-        Row(controls=[self.submit_btn], alignment=MainAxisAlignment.CENTER, spacing=20)
+        Row(controls=[self.submit_btn, self.clear_btn], alignment=MainAxisAlignment.CENTER, spacing=20)
         ]
     )
         
@@ -341,7 +342,36 @@ class Calculator(Container):
         else:
             print(">>>>>> Validation failed <<<<<<")
         self.result_view.update()
+    
+    # Clear the Result
+    def click_clear_btn(self):
         
+        icons = [self.result_view.ab_ob_icon, self.result_view.high_bl_pr_icon,
+                 self.result_view.hyp_icon, self.result_view.anti_h_th_icon,
+                 self.result_view.hs_lpvp_icon, self.result_view.hyp_lip_th_icon,
+                 self.result_view.hypertriglyceridemia_icon, self.result_view.prediabetes_icon,
+                 self.result_view.diabetes_sec_type_icon, self.result_view.cad_icon,
+                 self.result_view.cad_mi_icon, self.result_view.chf_icon,
+                 self.result_view.stent_bypass_icon, self.result_view.stroke_or_ministroke_icon,
+                 self.result_view.periph_art_dis_icon]
+        for i in icons:
+            i.icon = Icons.CIRCLE
+            i.color = Colors.GREY
+            self.result_view.update()
+            
+        textfields_dropdowns = [self.cir_waist, self.cir_hips, self.h_blood_pressure, 
+                                self.l_blood_pressure, self.cholesterol, self.triglyceride_level, 
+                                self.fasting_plasma_glucose, self.glucose_pgtt, self.glycated_hemoglobin, 
+                                self.sex, self.hypertension, self.antihyp_therapy, 
+                                self.hypo_lipidemic_therapy, self.diabetes_second_type, self.cad_angina, 
+                                self.cad_mi, self.chronic_heart_failure, self.stenting_and_bypass, 
+                                self.stroke_or_ministroke, self.peripheral_artery_disease]
+        for i in textfields_dropdowns:
+            i.value = ""
+            self.result_view.update()
+
+        self.result_view.cmds_zero_text.visible = False
+        self.result_view.update()
         
     # Displaying the Result
     def display_result(self, value, icon_r):
@@ -361,7 +391,6 @@ class Calculator(Container):
             target_control.visible = False 
           
         self.result_view.update()
-        
         
     # Risk Factors Functions
     def ab_obesity(self, e):
