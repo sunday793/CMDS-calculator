@@ -1,13 +1,10 @@
 import flet as ft
 from flet import (Container, Page, Text, TextField,
-                  TextStyle, FontWeight, TextAlign,
-                  TextTheme, TextOverflow,
-                  Colors, Button, Dropdown,
-                  dropdown, Icon, Icons, IconButton,
-                  InputFilter, Brightness,
-                  Column, Row, ResponsiveRow, 
-                  ScrollMode, ThemeMode, Alignment,
-                  MainAxisAlignment, CrossAxisAlignment, Padding)
+                  TextStyle, FontWeight, Colors, Button, 
+                  Dropdown, dropdown, Icon, Icons, IconButton,
+                  InputFilter, Brightness, Column, Row, ResponsiveRow, 
+                  ScrollMode, ThemeMode, Alignment, MainAxisAlignment, 
+                  CrossAxisAlignment, Padding)
 
 
 class Calculator(Container):
@@ -60,11 +57,9 @@ class Calculator(Container):
             run_spacing=10,
             vertical_alignment=CrossAxisAlignment.CENTER,
             controls=[
-                # Каждая пара (Text + Control) занимает по 6 колонок на MD (пол-экрана)
-                # Внутри этих 6 колонок: 3 под текст, 3 под поле.
                 
                 Text("Пол:", size=16, col={"xs": 6, "md": 3}),
-                self.sex, # в фабрике поставьте col={"xs": 6, "md": 3}
+                self.sex,
                 
                 Text("Окружность талии:", size=16, col={"xs": 6, "md": 3}),
                 self.cir_waist,
@@ -73,7 +68,7 @@ class Calculator(Container):
                 self.cir_hips,
 
                 Text("Артериальное давление:", size=16, col={"xs": 6, "md": 3}),
-                # Давление можно сгруппировать в один Row внутри колонки для "/"
+               
                 Row([self.h_blood_pressure, 
                      Text("/", size=20), 
                      self.l_blood_pressure], 
@@ -123,7 +118,8 @@ class Calculator(Container):
                 Text("Стентирование и/или шунтирование в анамнезе:", size=16, col={"xs": 6, "md": 3}),
                 self.stenting_and_bypass,
 
-                Text("Острое нарушение мозгового кровообращения или Транзиторная ишемическая атака в анамнезе:", size=16, col={"xs": 6, "md": 3}),
+                Text("Острое нарушение мозгового кровообращения или Транзиторная ишемическая атака в анамнезе:", 
+                     size=16, col={"xs": 6, "md": 3}),
                 self.stroke_or_ministroke,
 
                 Text("Заболевания периферических артерий:", size=16, col={"xs": 6, "md": 3}),
@@ -326,17 +322,17 @@ class Calculator(Container):
             cmds_four_value = self.stage_four(e)
             
             if cmds_zero_value:
-                self.display_cmds(True, "Стадия 0.\nМетаболически здоров", self.result_view.cmds_zero_text)
+                self.display_cmds(True, "Стадия 0.\nМетаболически здоров", self.result_view.cmds_type_text)
             elif cmds_one_value:
-                self.display_cmds(True, "Стадия 1.\nНизкий кардиометаболический риск", self.result_view.cmds_zero_text)
+                self.display_cmds(True, "Стадия 1.\nНизкий кардиометаболический риск", self.result_view.cmds_type_text)
             elif cmds_two_value:
-                self.display_cmds(True, "Стадия 2.\nСредний кардиометаболический риск", self.result_view.cmds_zero_text)
+                self.display_cmds(True, "Стадия 2.\nСредний кардиометаболический риск", self.result_view.cmds_type_text)
             elif cmds_three_value:
-                self.display_cmds(True, "Стадия 3.\nВысокий кардиометаболический риск", self.result_view.cmds_zero_text)
+                self.display_cmds(True, "Стадия 3.\nВысокий кардиометаболический риск", self.result_view.cmds_type_text)
             elif cmds_four_value:
-                self.display_cmds(True, "Стадия 4.\nОчень высокий кардиометаболический риск", self.result_view.cmds_zero_text)
+                self.display_cmds(True, "Стадия 4.\nОчень высокий кардиометаболический риск", self.result_view.cmds_type_text)
             else:
-                self.result_view.cmds_zero_text.visible = False
+                self.result_view.cmds_type_text.visible = False
                 self.result_view.update()
             
         else:
@@ -370,7 +366,7 @@ class Calculator(Container):
             i.value = ""
             self.result_view.update()
 
-        self.result_view.cmds_zero_text.visible = False
+        self.display_cmds(True, "", self.result_view.cmds_type_text)
         self.result_view.update()
         
     # Displaying the Result
@@ -743,7 +739,9 @@ class Result(Container):
         self.stroke_or_ministroke_icon = Icon(Icons.CIRCLE, color=Colors.GREY, size=30)
         self.periph_art_dis_icon = Icon(Icons.CIRCLE, color=Colors.GREY, size=30)
         
-        self.cmds_zero_text = Text("", size=16)
+        self.cmds_type_text = Text("", size=16)
+        self.cmds_description_text = Text("", size=16)
+        
         
         self.content = Column(
             controls = [
@@ -783,7 +781,8 @@ class Result(Container):
                              Text("Заболевания периферических артерий", size=16)]),
                         Text("Стадирование по CMDS (Cadrio Metabolic Disease Staging)", size=18, 
                              bgcolor=Colors.AMBER_200, color=Colors.BLACK_87),
-                        self.cmds_zero_text
+                        self.cmds_type_text,
+                        self.cmds_description_text
                         ], 
             alignment=MainAxisAlignment.START
         )
