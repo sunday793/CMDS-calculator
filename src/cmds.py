@@ -847,20 +847,34 @@ def main(page: Page):
     # page.overlay.append(footer_container)
     # page.bottom_appbar.content(footer_container)
     
+    sources = Container(
+        content=Text(
+    """Источники:
+1.	The progression of cardiometabolic disease: Validation of a new cardiometabolic disease staging system applicable to obesity / F. Guo, D. R. Moellering, W. T. Garvey, 2014; 
+2.	Концепция новых национальных клинических рекомендаций по ожирению / Е. В. Шляхто, С. В. Недогода, А. О. Конради [и др.], 2016; 
+3.	Ожирение : оценка и тактика ведения пациентов. Коллективная монография / О. М. Драпкина, И. В. Самородская, М. А. Старинская [и др.], 2021]
+
+    """,
+        size=16
+        )
+    )
+    
     row_cont = ResponsiveRow(
         controls=[calc, 
-                  res],
+                  res,
+                  Container(height=100),
+                  sources],
         spacing=10,
         run_spacing=10 # Gap between rows when they wrap
     )
     
     if is_dark == True:
-        page.add(Text("CMDS Calculator", size=40, align=Alignment(0, 1)), 
+        page.add(Text("Калькулятор расчета кардиометаболического риска", size=40, align=Alignment(0, 1)), 
                 Row([change_theme_light_btn], alignment=MainAxisAlignment.CENTER),
                 row_cont)
         page.update()
     else:
-        page.add(Text("CMDS Calculator", size=40, align=Alignment(0, 1)), 
+        page.add(Text("Калькулятор расчета кардиометаболического риска", size=40, align=Alignment(0, 1)), 
                 Row([change_theme_dark_btn], alignment=MainAxisAlignment.CENTER),
                 row_cont)
         page.update()
