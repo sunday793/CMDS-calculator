@@ -322,15 +322,20 @@ class Calculator(Container):
             cmds_four_value = self.stage_four(e)
             
             if cmds_zero_value:
-                self.display_cmds(True, "Стадия 0.\nМетаболически здоров", self.result_view.cmds_type_text)
+                cmds_zero_stage = "Стадия 0. Отсутствие анализируемых факторов кардиометаболического риска, сахарного диабета 2-го типа и сердечно-сосудистых заболеваний"
+                self.display_cmds(True, cmds_zero_stage, self.result_view.cmds_type_text)
             elif cmds_one_value:
-                self.display_cmds(True, "Стадия 1.\nНизкий кардиометаболический риск", self.result_view.cmds_type_text)
+                cmds_first_stage = "Стадия 1. Низкий кардиометаболический риск. 10-летний риск развития СД 2-го типа возрастает в 1,75 раза. 10-летний риск развития сердечно-сосудистых заболеваний возрастает в 3,87 раза"
+                self.display_cmds(True, cmds_first_stage, self.result_view.cmds_type_text)
             elif cmds_two_value:
-                self.display_cmds(True, "Стадия 2.\nСредний кардиометаболический риск", self.result_view.cmds_type_text)
+                cmds_second_stage = "Стадия 2. Средний кардиометаболический риск. 10-летний риск развития СД 2-го типа возрастает в 4,6 раза. 10-летний риск развития сердечно-сосудистых заболеваний возрастает в 6,08 раза"
+                self.display_cmds(True, cmds_second_stage, self.result_view.cmds_type_text)
             elif cmds_three_value:
-                self.display_cmds(True, "Стадия 3.\nВысокий кардиометаболический риск", self.result_view.cmds_type_text)
+                cmds_third_stage = "Стадия 3. Высокий кардиометаболический риск. 10-летний риск развития СД 2-го типа возрастает в 11 раз. 10-летний риск развития сердечно-сосудистых заболеваний возрастает в 6,3 раза"
+                self.display_cmds(True, cmds_third_stage, self.result_view.cmds_type_text)
             elif cmds_four_value:
-                self.display_cmds(True, "Стадия 4.\nОчень высокий кардиометаболический риск", self.result_view.cmds_type_text)
+                cmds_fourth_stage = "Стадия 4. Очень высокий кардиометаболический риск. Очень высокий риск осложнений ССЗ и СД 2-го типа. 10-летний риск развития сердечно-сосудистых событий возрастает в 16,3 раза"
+                self.display_cmds(True, cmds_fourth_stage, self.result_view.cmds_type_text)
             else:
                 self.result_view.cmds_type_text.visible = False
                 self.result_view.update()
@@ -740,7 +745,6 @@ class Result(Container):
         self.periph_art_dis_icon = Icon(Icons.CIRCLE, color=Colors.GREY, size=30)
         
         self.cmds_type_text = Text("", size=16)
-        self.cmds_description_text = Text("", size=16)
         
         
         self.content = Column(
@@ -779,10 +783,9 @@ class Result(Container):
                                   size=16)]),
                         Row([self.periph_art_dis_icon,
                              Text("Заболевания периферических артерий", size=16)]),
-                        Text("Стадирование по CMDS (Cadrio Metabolic Disease Staging)", size=18, 
+                        Text("Стадирование по CMDS (Cadriometabolic Disease Staging)", size=18, 
                              bgcolor=Colors.AMBER_200, color=Colors.BLACK_87),
-                        self.cmds_type_text,
-                        self.cmds_description_text
+                        self.cmds_type_text
                         ], 
             alignment=MainAxisAlignment.START
         )
