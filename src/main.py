@@ -809,7 +809,7 @@ def change_theme_func(e):
 
 
 def main(page: Page):
-    page.title = 'CMDS'
+    page.title = ' Калькулятор CMDS'
     page.theme_mode = ThemeMode.SYSTEM
     
     is_dark = page.platform_brightness == Brightness.DARK
@@ -849,7 +849,7 @@ def main(page: Page):
     
     sources = Container(
         content=Text(
-    """Источники:
+    """При составлении калькулятора использовались источники:
 1.	The progression of cardiometabolic disease: Validation of a new cardiometabolic disease staging system applicable to obesity / F. Guo, D. R. Moellering, W. T. Garvey, 2014; 
 2.	Концепция новых национальных клинических рекомендаций по ожирению / Е. В. Шляхто, С. В. Недогода, А. О. Конради [и др.], 2016; 
 3.	Ожирение : оценка и тактика ведения пациентов. Коллективная монография / О. М. Драпкина, И. В. Самородская, М. А. Старинская [и др.], 2021]
