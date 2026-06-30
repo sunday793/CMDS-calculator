@@ -1,10 +1,10 @@
 import flet as ft
-from flet import (Container, Page, Text, TextField,
+from flet import (Container, Page, Text, TextField, TextAlign,
                   TextStyle, FontWeight, Colors, Button, 
                   Dropdown, dropdown, Icon, Icons, IconButton,
                   InputFilter, Brightness, Column, Row, ResponsiveRow, 
                   ScrollMode, ThemeMode, Alignment, MainAxisAlignment, 
-                  CrossAxisAlignment, Padding)
+                  CrossAxisAlignment)
 
 
 class Calculator(Container):
@@ -809,7 +809,7 @@ def change_theme_func(e):
 
 
 def main(page: Page):
-    page.title = ' Калькулятор CMDS'
+    page.title = 'Калькулятор расчета кардиометаболического риска по Cardiometabolic Disease Staging (CMDS)'
     page.theme_mode = ThemeMode.SYSTEM
     
     is_dark = page.platform_brightness == Brightness.DARK
@@ -869,12 +869,14 @@ def main(page: Page):
     )
     
     if is_dark == True:
-        page.add(Text("Калькулятор расчета кардиометаболического риска", size=40, align=Alignment(0, 1)), 
+        page.add(Text("Калькулятор расчета кардиометаболического риска по Cardiometabolic Disease Staging (CMDS)", 
+                      size=40, align=Alignment(0, 1), selectable=False), 
                 Row([change_theme_light_btn], alignment=MainAxisAlignment.CENTER),
                 row_cont)
         page.update()
     else:
-        page.add(Text("Калькулятор расчета кардиометаболического риска", size=40, align=Alignment(0, 1)), 
+        page.add(Text("Калькулятор расчета кардиометаболического риска по Cardiometabolic Disease Staging (CMDS)", 
+                      size=40, align=Alignment(0, 1), selectable=False), 
                 Row([change_theme_dark_btn], alignment=MainAxisAlignment.CENTER),
                 row_cont)
         page.update()
