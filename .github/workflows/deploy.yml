@@ -33,7 +33,7 @@ jobs:
         run: pip install flet
 
       - name: Build Web App
-        run: flet publish main.py --base-url /${{ github.event.repository.name }}/
+        run: flet publish src/main.py --base-url /${{ github.event.repository.name }}/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
